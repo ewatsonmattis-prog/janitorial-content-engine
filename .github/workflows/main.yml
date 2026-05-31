@@ -24,7 +24,7 @@ jobs:
       - name: Create .env
         run: |
           echo "AI_PROVIDER=anthropic" >> .env
-          echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}" >> .env
+          echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPICKEY }}" >> .env
 
       - name: Generate content
         run: |
