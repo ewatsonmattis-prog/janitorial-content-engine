@@ -28,8 +28,7 @@ jobs:
           echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPICKEY }}" >> .env
 
       - name: Generate content
-        run: |
-          npm run generate:topic -- "How commercial cleaning companies can win facilities manager contracts"
+        run: | npm run generate:topic -- "Office cleaning contract lead generation"
 
       - name: Commit outputs
         run: |
