@@ -1,0 +1,60 @@
+// ─────────────────────────────────────────────────────────────
+// CleanReach Content Engine – Cold Email Angle Generator
+// ─────────────────────────────────────────────────────────────
+
+import { ContentInput, ColdEmailAngle } from '../config/types';
+import { aiComplete, parseJsonFromAI } from '../utils/aiClient';
+import { loadPrompt, buildVariables, CLEANREACH_SYSTEM_PROMPT } from '../utils/promptLoader';
+
+const SYSTEM_PROMPT = `${CLEANREACH_SYSTEM_PROMPT}
+
+For cold email angles, return a JSON array of exactly 3 emails. Each object must have:
+{
+  "format": "Pain Point Open | Credibility Open | Direct Ask",
+  "subjectLine": "string (under 40 characters)",
+  "openingLine": "string",
+  "painPoint": "string",
+  "valueProposition": "string",
+  "cta": "string",
+  "fullEmail": "string (complete email under 100 words with personalisation tokens)",
+  "targetSegment": "string"
+}
+
+Personalisation tokens to use: [First Name], [Company], [City], [Industry]
+
+Return ONLY valid JSON. No markdown, no commentary.`;
+
+export async function generateColdEmailAngles(
+  input: ContentInput
+): Promise<ColdEmailAngle[]> {
+  const promptTemplate = loadPrompt('cold-email-angle', buildVariables(input));
+
+  const userPrompt = `${promptTemplate}
+
+Return exactly 3 cold email angles as a JSON array — one per format (Pain Point, Credibility, Direct Ask). Each email must be under 100 words, human-sounding, and include personalisation tokens. Write emails as if from the cleaning company, not from CleanReach.`;
+
+  const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
+
+  type RawAngle = {
+    format?: string;
+    subjectLine: string;
+    openingLine: string;
+    painPoint: string;
+    valueProposition: string;
+    cta: string;
+    fullEmail: string;
+    targetSegment: string;
+  };
+
+  const angles = parseJsonFromAI<RawAngle[]>(raw);
+
+  return angles.map((a) => ({
+    subjectLine: a.subjectLine ?? '',
+    openingLine: a.openingLine ?? '',
+    painPoint: a.painPoint ?? '',
+    valueProposition: a.valueProposition ?? '',
+    cta: a.cta ?? '',
+    fullEmail: a.fullEmail ?? '',
+    targetSegment: a.targetSegment ?? '',
+  }));
+}
