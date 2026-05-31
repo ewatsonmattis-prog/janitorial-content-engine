@@ -104,17 +104,24 @@ export async function aiComplete(
  * Parses JSON from AI output — strips markdown code fences if present.
  */
 export function parseJsonFromAI<T>(raw: string): T {
-  // Remove ```json ... ``` or ``` ... ``` wrappers
-  const cleaned = raw
+  let cleaned = raw
     .replace(/^```(?:json)?\s*/im, '')
     .replace(/```\s*$/im, '')
     .trim();
 
+  const firstBrace = cleaned.indexOf('{');
+  const lastBrace = cleaned.lastIndexOf('}');
+
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+  }
+
   try {
     return JSON.parse(cleaned) as T;
   } catch {
+    console.error('Failed JSON from AI:', cleaned);
     throw new Error(
-      `Failed to parse AI JSON output.\nRaw (first 500 chars):\n${cleaned.slice(0, 500)}`
+      `Failed to parse AI JSON output.\nRaw first 500 chars:\n${cleaned.slice(0, 500)}`
     );
   }
 }
