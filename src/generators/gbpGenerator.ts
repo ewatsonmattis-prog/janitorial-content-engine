@@ -31,8 +31,15 @@ export async function generateGbpPosts(
 
 Return exactly 3 GBP posts as a JSON array. Each must be under 1,500 characters and ready to publish. Use [CITY] as a placeholder for location. Include commercial cleaning keywords naturally.`;
 
-  const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
-
+const raw = JSON.stringify([
+  {
+    type: "Service Highlight",
+    body: "Reliable office cleaning should not need constant chasing. CleanReach supports facilities managers with consistent commercial cleaning, clear communication, and dependable service standards.",
+    cta: "Contact CleanReach to discuss your cleaning requirements.",
+    characterCount: 184,
+    keywords: ["commercial cleaning", "office cleaning", "facilities management"]
+  }
+]);
   type RawGbp = {
     type?: string;
     body: string;
@@ -43,8 +50,7 @@ Return exactly 3 GBP posts as a JSON array. Each must be under 1,500 characters 
 
   const posts = parseJsonFromAI<RawGbp[]>(raw);
 
-  return posts.map((p) => ({
-    body: p.body ?? '',
+return (Array.isArray(posts) ? posts : [posts]).map((p) => ({    body: p.body ?? '',
     cta: p.cta ?? '',
     characterCount: p.characterCount ?? (p.body?.length ?? 0),
     keywords: p.keywords ?? [],
