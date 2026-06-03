@@ -44,14 +44,14 @@ export const config = {
     format: optional('EXPORT_FORMAT', 'all'),
   },
   buffer: {
-    accessToken: optional('BUFFER_ACCESS_TOKEN'),
-    profileIds: optional('BUFFER_PROFILE_IDS', '').split(',').filter(Boolean),
-  },
-};
+  accessToken: optional('BUFFER_ACCESS_TOKEN'),
+  profileIds: optional('BUFFER_PROFILE_IDS', '').split(',').filter(Boolean),
+},
 ghl: {
   apiKey: optional('GHL_API_KEY'),
   locationId: optional('GHL_LOCATION_ID'),
 },
+};
 /**
  * Validates that the minimum required variables are present
  * for the chosen AI provider.
