@@ -29,9 +29,26 @@ export async function generateColdEmailAngles(
 ): Promise<ColdEmailAngle[]> {
   const promptTemplate = loadPrompt('cold-email-angle', buildVariables(input));
 
-  const userPrompt = `${promptTemplate}
+const userPrompt = `${promptTemplate}
 
-Return exactly 3 cold email angles as a JSON array — one per format (Pain Point, Credibility, Direct Ask). Each email must be under 100 words, human-sounding, and include personalisation tokens. Write emails as if from the cleaning company, not from CleanReach.`;
+Return ONLY a valid JSON array with exactly 3 objects.
+Do not include markdown or explanations.
+
+Each object must use this exact shape:
+{
+  "format": "",
+  "subjectLine": "",
+  "openingLine": "",
+  "painPoint": "",
+  "valueProposition": "",
+  "cta": "",
+  "fullEmail": "",
+  "targetSegment": ""
+}
+
+Keep every field under 25 words.
+Keep fullEmail under 80 words.
+Close the JSON array properly.`;
 
   const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
 
