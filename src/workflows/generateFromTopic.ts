@@ -112,6 +112,19 @@ if (config.ghl.apiKey && config.ghl.locationId) {
     );
   }
 }
+    try {
+  console.log('\n📇 Creating GoHighLevel contact...');
+
+  const contact = await createContact(
+    'test@cleanreach.ai',
+    'CleanReach',
+    'Test'
+  );
+
+  console.log('✅ Contact created:', contact);
+} catch (err) {
+  console.warn('⚠️ GHL sync failed:', err);
+}
     console.log('\n🎉 Content pack ready for review!');
     console.log(`   Pack ID: ${pack.id}`);
     console.log(`   Topic: ${pack.input.topic}`);
