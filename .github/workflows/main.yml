@@ -23,15 +23,17 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
+        
       - name: Create .env
         run: |
           echo "AI_PROVIDER=anthropic" >> .env
           echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPICKEY }}" >> .env
+          echo "GHL_API_KEY=${{ secrets.GHL_API_KEY }}" >> .env
+          echo "GHL_LOCATION_ID=${{ secrets.GHL_LOCATION_ID }}" >> .env
 
       - name: Generate content
-        run: | 
-         npm run generate:topic -- "Office cleaning contract lead generation"
+        run: |
+          npm run generate:topic -- "Office cleaning contract lead generation"
 
       - name: Commit outputs
         run: |
