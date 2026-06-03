@@ -1,0 +1,100 @@
+{
+  "id": "593a612f-7857-4a61-8003-e2fac7c1e00f",
+  "createdAt": "2026-06-03T20:06:43.190Z",
+  "input": {
+    "topic": "Office cleaning contract lead generation",
+    "pillar": "Cold Email Lead Generation",
+    "sourceType": "Manual Topic",
+    "coreInsight": "Facilities managers shortlist cleaning contractors based on responsiveness and specificity — generic outreach gets ignored. A 3-email sequence that references their industry, building size, and cleaning frequency converts at 3–5x the rate of a generic pitch.",
+    "targetAudience": "Facilities managers in offices, healthcare, and education",
+    "cta": "Book a free cold email strategy call at api.leadconnectorhq.com/widget/bookings/call-with-cleanreach"
+  },
+  "linkedInPosts": [
+    {
+      "hook": "Facilities managers delete generic cleaning emails in seconds.",
+      "body": "Most commercial cleaning outreach sounds identical. Facilities managers respond to consistency, accountability, and clear reporting.",
+      "cta": "Would a short conversation be worthwhile?",
+      "fullPost": "Facilities managers delete generic cleaning emails in seconds.\n\nMost commercial cleaning outreach sounds identical. Facilities managers respond to consistency, accountability, and clear reporting.\n\nCleanReach helps facilities teams reduce complaints, improve standards, and remove supplier headaches.\n\nWould a short conversation be worthwhile?",
+      "hashtags": [
+        "#commercialcleaning",
+        "#facilitiesmanagement",
+        "#cleaningservices"
+      ],
+      "characterCount": 420
+    }
+  ],
+  "blogArticle": {
+    "title": "How Facilities Managers Can Improve Cleaning Contractor Reliability",
+    "seo": {
+      "primaryKeyword": "commercial cleaning contract lead generation",
+      "secondaryKeywords": [
+        "commercial cleaning",
+        "facilities management",
+        "office cleaning"
+      ],
+      "metaTitle": "Commercial Cleaning Contract Lead Generation",
+      "metaDescription": "Learn how facilities managers can improve cleaning contractor reliability with clearer standards, reporting and service accountability."
+    },
+    "introduction": "Reliable cleaning is essential for every commercial site. Facilities managers need contractors who communicate clearly, maintain standards and reduce day-to-day pressure.",
+    "sections": [
+      {
+        "heading": "Why reliability matters",
+        "body": "Missed visits, inconsistent standards and poor communication quickly create complaints and extra admin. A reliable cleaning partner helps facilities teams protect service quality."
+      }
+    ],
+    "conclusion": "CleanReach supports commercial sites with consistent cleaning, clear communication and accountable service delivery.",
+    "fullMarkdown": "# How Facilities Managers Can Improve Cleaning Contractor Reliability\n\nReliable cleaning is essential for every commercial site.\n\n## Why reliability matters\n\nMissed visits, inconsistent standards and poor communication quickly create complaints and extra admin.\n\nCleanReach supports commercial sites with consistent cleaning, clear communication and accountable service delivery.",
+    "wordCount": 95
+  },
+  "emailNewsletter": {
+    "subjectLine": "Why FMs ignore your cold emails",
+    "previewText": "It's not your price — it's how generic your pitch looks to them.",
+    "greeting": "Hi [First Name],",
+    "body": "Most cold emails cleaning companies send get deleted in under three seconds.\n\nNot because the service is bad. Because the email looks like it was written for anyone — which means it feels relevant to no one.\n\nFacilities managers receive outreach constantly. What makes them stop and read? When something in the first two lines reflects their world. Their building type. Their sector. A problem specific to their setup.\n\nGeneric pitch: \"We provide professional commercial cleaning services to businesses across the region.\"\n\nSpecific pitch: \"We work with mid-size office buildings in the 10,000–30,000 sq ft range — typically doing 3x weekly cleans. If your current contractor is inconsistent on early-morning attendance, that's exactly the gap we help close.\"\n\nOne of those gets a reply. The other gets archived.\n\nThe approach that consistently works is a 3-email sequence built around three things: the prospect's industry, their likely building size, and their cleaning frequency. That level of specificity signals that you've done five minutes of research — and that alone separates you from 95% of the outreach they receive.\n\nSequence structure that works:\n\nEmail 1 — Short intro referencing their sector and a common pain point (e.g., compliance requirements in healthcare, footfall pressure in education).\n\nEmail 2 — Sent 4 days later. One sentence acknowledging they're busy, followed by a single relevant proof point (a client result, a retained contract length, a specific location).\n\nEmail 3 — Sent 5 days after that. A low-friction close: \"Not the right time?\" or \"Happy to send over what we'd typically propose for a building your size?\"\n\nThis sequence converts at 3–5x the rate of a single generic email. Not because it's clever — because it's relevant.\n\nIf you want to build this sequence for your own target list of FMs, we can map it out with you on a free strategy call.",
+    "cta": "Book your free cold email strategy call — we'll build the sequence framework with you: api.leadconnectorhq.com/widget/bookings/call-with-cleanreach",
+    "ctaUrl": "api.leadconnectorhq.com/widget/bookings/call-with-cleanreach",
+    "fullHtml": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Why FMs ignore your cold emails</title></head><body style=\"margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,sans-serif;\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#f4f4f4;padding:32px 16px;\"><tr><td align=\"center\"><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;background-color:#ffffff;border-radius:6px;overflow:hidden;\"><tr><td style=\"background-color:#0f2b4c;padding:24px 32px;\"><p style=\"margin:0;font-size:13px;color:#7fafd4;letter-spacing:1px;text-transform:uppercase;\">CleanReach</p><p style=\"margin:8px 0 0 0;font-size:11px;color:#4a7fa8;\">Commercial Cleaning Growth</p></td></tr><tr><td style=\"padding:36px 32px 24px 32px;\"><p style=\"margin:0 0 24px 0;font-size:15px;color:#333333;\">Hi [First Name],</p><p style=\"margin:0 0 16px 0;font-size:15px;color:#333333;line-height:1.6;\">Most cold emails cleaning companies send get deleted in under three seconds.</p><p style=\"margin:0 0 16px 0;font-size:15px;color:#333333;line-height:1.6;\">Not because the service is bad. Because the email looks like it was written for anyone — which means it feels relevant to no one.</p><p style=\"margin:0 0 16px 0;font-size:15px;color:#333333;line-height:1.6;\">Facilities managers receive outreach constantly. What makes them stop and read? When something in the first two lines reflects their world. Their building type. Their sector. A problem specific to their setup.</p><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin:24px 0;\"><tr><td style=\"background-color:#f8f9fa;border-left:3px solid #cccccc;padding:16px 20px;\"><p style=\"margin:0 0 10px 0;font-size:14px;color:#888888;font-style:italic;line-height:1.6;\"><strong style=\"color:#555555;\">Generic pitch:</strong> \"We provide professional commercial cleaning services to businesses across the region.\"</p><p style=\"margin:0;font-size:14px;color:#555555;font-style:italic;line-height:1.6;\"><strong style=\"color:#0f2b4c;\">Specific pitch:</strong> \"We work with mid-size office buildings in the 10,000–30,000 sq ft range — typically doing 3x weekly cleans. If your current contractor is inconsistent on early-morning attendance, that's exactly the gap we help close.\"</p></td></tr></table><p style=\"margin:0 0 16px 0;font-size:15px;color:#333333;line-height:1.6;\">One of those gets a reply. The other gets archived.</p><p style=\"margin:0 0 16px 0;font-size:15px;color:#333333;line-height:1.6;\">The approach that consistently works is a 3-email sequence built around three things: the prospect's industry, their likely building size, and their cleaning frequency. That level of specificity signals that you've done five minutes of research — and that alone separates you from 95% of the outreach they receive.</p><p style=\"margin:0 0 12px 0;font-size:15px;color:#0f2b4c;font-weight:bold;line-height:1.6;\">Sequence structure that works:</p><p style=\"margin:0 0 10px 0;font-size:15px;color:#333333;line-height:1.6;\"><strong>Email 1</strong> — Short intro referencing their sector and a common pain point (e.g., compliance requirements in healthcare, footfall pressure in education).</p><p style=\"margin:0 0 10px 0;font-size:15px;color:#333333;line-height:1.6;\"><strong>Email 2</strong> — Sent 4 days later. One sentence acknowledging they're busy, followed by a single relevant proof point (a client result, a retained contract length, a specific location).</p><p style=\"margin:0 0 16px 0;font-size:15px;color:#333333;line-height:1.6;\"><strong>Email 3</strong> — Sent 5 days after that. A low-friction close: \"Not the right time?\" or \"Happy to send over what we'd typically propose for a building your size?\"</p><p style=\"margin:0 0 16px 0;font-size:15px;color:#333333;line-height:1.6;\">This sequence converts at 3–5x the rate of a single generic email. Not because it's clever — because it's relevant.</p><p style=\"margin:0 0 32px 0;font-size:15px;color:#333333;line-height:1.6;\">If you want to build this sequence for your own target list of FMs, we can map it out with you on a free strategy call.</p><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td align=\"center\" style=\"padding-bottom:32px;\"><a href=\"https://api.leadconnectorhq.com/widget/bookings/call-with-cleanreach\" style=\"display:inline-block;background-color:#0f2b4c;color:#ffffff;font-size:15px;font-weight:bold;text-decoration:none;padding:14px 28px;border-radius:4px;\">Book Your Free Cold Email Strategy Call</a><p style=\"margin:12px 0 0 0;font-size:12px;color:#888888;\">30 minutes. No obligation. We'll build the sequence framework with you.</p></td></tr></table></td></tr><tr><td style=\"background-color:#f8f9fa;padding:20px 32px;border-top:1px solid #eeeeee;\"><p style=\"margin:0 0 4px 0;font-size:13px;color:#555555;\">The CleanReach Team</p><p style=\"margin:0 0 12px 0;font-size:12px;color:#888888;\">Helping commercial cleaning companies win recurring contracts.</p><p style=\"margin:0;font-size:11px;color:#aaaaaa;\">You're receiving this because you signed up for CleanReach insights. <a href=\"#\" style=\"color:#aaaaaa;\">Unsubscribe</a>.</p></td></tr></table></td></tr></table></body></html>",
+    "wordCount": 342
+  },
+  "gbpPosts": [
+    {
+      "body": "Reliable office cleaning should not need constant chasing. CleanReach supports facilities managers with consistent commercial cleaning, clear communication, and dependable service standards.",
+      "cta": "Contact CleanReach to discuss your cleaning requirements.",
+      "characterCount": 184,
+      "keywords": [
+        "commercial cleaning",
+        "office cleaning",
+        "facilities management"
+      ]
+    }
+  ],
+  "videoScripts": [
+    {
+      "hook": "Why facilities managers keep changing cleaning contractors",
+      "problem": "Missed visits and poor communication create constant frustration.",
+      "solution": "CleanReach delivers reliable commercial cleaning with consistent reporting and accountability.",
+      "proof": "Our focus is long-term service consistency and proactive communication.",
+      "cta": "Book a cleaning review with CleanReach.",
+      "fullScript": "Facilities managers tell us the same thing. Their cleaning contractor starts well but standards slip. Missed visits, inconsistent communication and poor accountability create unnecessary pressure. CleanReach was built to solve this. We provide reliable commercial cleaning, clear reporting and responsive support so you can focus on running your facility instead of chasing contractors. If you would like a review of your current cleaning arrangements, get in touch with CleanReach today.",
+      "durationSeconds": 60,
+      "platform": "LinkedIn Video"
+    }
+  ],
+  "coldEmailAngles": [
+    {
+      "subjectLine": "Cleaning let you down again?",
+      "openingLine": "Most facilities managers need reliable cleaning without constant chasing.",
+      "painPoint": "Missed visits and poor communication create unnecessary pressure.",
+      "valueProposition": "CleanReach provides consistent commercial cleaning with clear reporting.",
+      "cta": "Would it be worth a quick conversation?",
+      "fullEmail": "Most facilities managers need reliable cleaning without constant chasing. Missed visits and poor communication create unnecessary pressure. CleanReach provides consistent commercial cleaning with clear reporting. Would it be worth a quick conversation?",
+      "targetSegment": "Facilities Managers"
+    }
+  ],
+  "ctas": [
+    "Download our cold email templates proven to win office cleaning contracts.",
+    "Book a free pipeline audit and find your next 5 office clients.",
+    "Get our 30-day cold outreach plan built for commercial cleaning companies."
+  ],
+  "status": "Generated"
+}
