@@ -24,18 +24,9 @@ async function callAnthropic(
   const response = await client.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 8192,
-system: `${systemPrompt}
-
-You must return ONLY valid JSON.
-Do not include markdown.
-Do not include explanations.
-Do not include comments.
-Do not include code fences.
-Ensure the JSON is complete.
-Ensure all objects, arrays, and strings are properly closed.
-The response must be directly parseable by JSON.parse().`,
-  messages: [{ role: 'user', content: userPrompt }],
-
+system: systemPrompt,
+messages: [{ role: 'user', content: userPrompt }],
+});
   const textBlock = response.content.find((b) => b.type === 'text');
   if (!textBlock || textBlock.type !== 'text') {
     throw new Error('No text content in Anthropic response');
