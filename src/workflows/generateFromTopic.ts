@@ -17,13 +17,14 @@ import { createContact } from '../utils/ghlClient';
 // Replace this or pass via CLI args / environment variables
 
 const EXAMPLE_INPUT: ContentInput = {
-  topic: 'How commercial cleaning companies can win facilities manager contracts through cold email',
-  pillar: 'Cold Email Lead Generation',
-  sourceType: 'Manual Topic',
-  coreInsight:
-    'Facilities managers shortlist cleaning contractors based on responsiveness and specificity — generic outreach gets ignored. A 3-email sequence that references their industry, building size, and cleaning frequency converts at 3–5x the rate of a generic pitch.',
-  targetAudience: 'Facilities managers in offices, healthcare, and education',
-  cta: 'Book a free cold email strategy call at api.leadconnectorhq.com/widget/bookings/call-with-cleanreach',
+  topic: 'Why commercial cleaning companies struggle to turn outreach into signed contracts',
+pillar: 'Middle Funnel Authority',
+sourceType: 'Weekly Authority Content',
+coreInsight:
+  'Cleaning company owners do not need more generic leads. They need a system that builds trust, follows up consistently, and turns interest into booked sales conversations.',
+targetAudience:
+  'Commercial cleaning company owners, managing directors, and growth-focused cleaning businesses',
+cta: 'Book a CleanReach growth strategy call',
 };
 
 async function main() {
