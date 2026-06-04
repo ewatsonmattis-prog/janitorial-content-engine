@@ -66,7 +66,7 @@ Close the JSON array properly.`;
 const parsed = parseJsonFromAI<RawAngle | RawAngle[]>(raw);
 const angles = Array.isArray(parsed) ? parsed : [parsed];
 
-return (Array.isArray(angles) ? angles : [angles]).map((a) => ({
+return angles.map((a) => ({
     subjectLine: a.subjectLine ?? '',
     openingLine: a.openingLine ?? '',
     painPoint: a.painPoint ?? '',
