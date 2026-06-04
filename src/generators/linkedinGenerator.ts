@@ -37,10 +37,10 @@ const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
   characterCount: number;
   format?: string;
 };
-  const posts = parseJsonFromAI<RawPost[]>(raw);
-  const safePosts = Array.isArray(posts) ? posts : [posts];
-
-  return safePosts.map((p) => ({
+const parsed = parseJsonFromAI<RawPost | RawPost[]>(raw);
+const posts = Array.isArray(parsed) ? parsed : [parsed];  
+const safePosts = posts;
+return safePosts.map((p) => ({
     hook: p.hook ?? '',
     body: p.body ?? '',
     cta: p.cta ?? '',
