@@ -58,22 +58,36 @@ export async function generateEmailNewsletter(
 ): Promise<EmailNewsletter> {
   const promptTemplate = loadPrompt('email-newsletter', buildVariables(input));
 
-  const userPrompt = `${promptTemplate}
+const userPrompt = `${promptTemplate}
 
-Return the complete email as a JSON object. The body field should be plain text. Generate a simple fullHtml email — clean, mobile-friendly, inline styles only.`;
+Return ONLY valid JSON with this exact shape:
+{
+  "subjectLine": "",
+  "previewText": "",
+  "greeting": "",
+  "body": "",
+  "cta": "",
+  "ctaUrl": "",
+  "wordCount": 0
+}
 
-  const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
+Do not include fullHtml.
+Do not include markdown.
+Do not include commentary.
+Keep body to 300–400 words.`;
 
-  type RawEmail = {
-    subjectLine: string;
-    previewText: string;
-    greeting: string;
-    body: string;
-    cta: string;
-    ctaUrl: string;
-    fullHtml: string;
-    wordCount: number;
-  };
+const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
+
+type RawEmail = {
+  subjectLine: string;
+  previewText: string;
+  greeting: string;
+  body: string;
+  cta: string;
+  ctaUrl: string;
+  wordCount: number;
+  fullHtml?: string;
+};
 
 const parsed = parseJsonFromAI<RawEmail | RawEmail[]>(raw);
 const email = Array.isArray(parsed) ? parsed[0] : parsed;
