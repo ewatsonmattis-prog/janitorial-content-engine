@@ -108,11 +108,15 @@ export function parseJsonFromAI<T>(raw: string): T {
     .replace(/```\s*$/im, '')
     .trim();
 
-  const firstBrace = cleaned.indexOf('{');
-  const lastBrace = cleaned.lastIndexOf('}');
+  const firstArray = cleaned.indexOf('[');
+  const lastArray = cleaned.lastIndexOf(']');
+  const firstObject = cleaned.indexOf('{');
+  const lastObject = cleaned.lastIndexOf('}');
 
-  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-    cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+  if (firstArray !== -1 && lastArray !== -1 && lastArray > firstArray) {
+    cleaned = cleaned.slice(firstArray, lastArray + 1);
+  } else if (firstObject !== -1 && lastObject !== -1 && lastObject > firstObject) {
+    cleaned = cleaned.slice(firstObject, lastObject + 1);
   }
 
   try {
