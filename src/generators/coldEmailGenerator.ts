@@ -50,18 +50,7 @@ Keep every field under 25 words.
 Keep fullEmail under 80 words.
 Close the JSON array properly.`;
 
-  const raw = JSON.stringify([
-  {
-    format: "Pain Point Open",
-    subjectLine: "Cleaning let you down again?",
-    openingLine: "Most facilities managers need reliable cleaning without constant chasing.",
-    painPoint: "Missed visits and poor communication create unnecessary pressure.",
-    valueProposition: "CleanReach provides consistent commercial cleaning with clear reporting.",
-    cta: "Would it be worth a quick conversation?",
-    fullEmail: "Most facilities managers need reliable cleaning without constant chasing. Missed visits and poor communication create unnecessary pressure. CleanReach provides consistent commercial cleaning with clear reporting. Would it be worth a quick conversation?",
-    targetSegment: "Facilities Managers"
-  }
-]);
+  const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
 
   type RawAngle = {
     format?: string;
@@ -74,7 +63,8 @@ Close the JSON array properly.`;
     targetSegment: string;
   };
 
-  const angles = parseJsonFromAI<RawAngle[]>(raw);
+const parsed = parseJsonFromAI<RawAngle | RawAngle[]>(raw);
+const angles = Array.isArray(parsed) ? parsed : [parsed];
 
 return (Array.isArray(angles) ? angles : [angles]).map((a) => ({
     subjectLine: a.subjectLine ?? '',
