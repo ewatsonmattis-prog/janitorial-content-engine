@@ -8,7 +8,7 @@ import { loadPrompt, buildVariables, CLEANREACH_SYSTEM_PROMPT } from '../utils/p
 
 const SYSTEM_PROMPT = `${CLEANREACH_SYSTEM_PROMPT}
 
-For cold email angles, return a JSON array of exactly 3 emails. Each object must have:
+For cold email angles, return one JSON object. Each object must have:
 {
   "format": "Pain Point Open | Credibility Open | Direct Ask",
   "subjectLine": "string (under 40 characters)",
@@ -31,7 +31,7 @@ export async function generateColdEmailAngles(
 
 const userPrompt = `${promptTemplate}
 
-Return ONLY a valid JSON array with exactly 3 objects.
+Return ONLY one valid JSON object.
 Do not include markdown or explanations.
 
 Each object must use this exact shape:
@@ -48,7 +48,7 @@ Each object must use this exact shape:
 
 Keep every field under 25 words.
 Keep fullEmail under 80 words.
-Close the JSON array properly.`;
+Return one complete JSON object only.`;
 
   const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
 
