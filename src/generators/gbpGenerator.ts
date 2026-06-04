@@ -8,7 +8,7 @@ import { loadPrompt, buildVariables, CLEANREACH_SYSTEM_PROMPT } from '../utils/p
 
 const SYSTEM_PROMPT = `${CLEANREACH_SYSTEM_PROMPT}
 
-For Google Business Profile posts, return a JSON array of exactly 3 posts. Each object must have:
+For Google Business Profile posts, return one JSON object. Each object must have:
 {
   "type": "Service Highlight | Social Proof | Local Authority",
   "body": "string (under 1500 characters)",
@@ -29,7 +29,7 @@ export async function generateGbpPosts(
 
   const userPrompt = `${promptTemplate}
 
-Return exactly 3 GBP posts as a JSON array. Each must be under 1,500 characters and ready to publish. Use [CITY] as a placeholder for location. Include commercial cleaning keywords naturally.`;
+Return ONE valid JSON object only. Each must be under 1,500 characters and ready to publish. Use [CITY] as a placeholder for location. Include commercial cleaning keywords naturally.`;
 
   const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
   type RawGbp = {
