@@ -88,7 +88,8 @@ type RawEmail = {
   wordCount: number;
   fullHtml?: string;
 };
-
+console.log('EMAIL RAW RESPONSE:');
+console.log(raw);
 const parsed = parseJsonFromAI<RawEmail | RawEmail[]>(raw);
 const email = Array.isArray(parsed) ? parsed[0] : parsed;
   // If AI didn't return valid HTML, generate it
