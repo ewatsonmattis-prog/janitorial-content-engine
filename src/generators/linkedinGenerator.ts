@@ -26,11 +26,17 @@ export async function generateLinkedInPosts(
 ): Promise<LinkedInPost[]> {
   const promptTemplate = loadPrompt('linkedin-post', buildVariables(input));
 
-  const userPrompt = `${promptTemplate}
-
-Return exactly 5 LinkedIn posts as a JSON array matching the schema described. Each post must be distinctly different in format and angle. Make them ready to publish.`;
-
+const userPrompt = `${promptTemplate}`;
 const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
+  type RawPost = {
+  hook: string;
+  body: string;
+  cta: string;
+  fullPost: string;
+  hashtags: string[];
+  characterCount: number;
+  format?: string;
+};
 const posts = parseJsonFromAI<RawPost[]>(raw);
 
 return (Array.isArray(posts) ? posts : [posts]).map((p) => ({  
