@@ -67,12 +67,12 @@ const parsed = parseJsonFromAI<RawAngle | RawAngle[]>(raw);
 const angles = Array.isArray(parsed) ? parsed : [parsed];
 
 return angles.map((a) => ({
-    subjectLine: a.subjectLine ?? '',
-    openingLine: a.openingLine ?? '',
-    painPoint: a.painPoint ?? '',
-    valueProposition: a.valueProposition ?? '',
-    cta: a.cta ?? '',
-    fullEmail: a.fullEmail ?? '',
-    targetSegment: a.targetSegment ?? '',
-  }));
+  subjectLine: a.subjectLine ?? '',
+  openingLine: a.openingLine ?? '',
+  painPoint: a.painPoint ?? '',
+  valueProposition: a.valueProposition ?? '',
+  cta: a.cta ?? '',
+  fullEmail: a.fullEmail ?? '',
+  targetSegment: a.targetSegment ?? '',
+}));
 }
