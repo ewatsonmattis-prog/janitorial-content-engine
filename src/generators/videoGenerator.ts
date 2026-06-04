@@ -32,24 +32,8 @@ export async function generateVideoScripts(
 
 Return exactly 3 video scripts as a JSON array — one per platform. Scripts should be fully written out, ready to record. Include rough timing cues in brackets. Keep total spoken time between 45–90 seconds per script.`;
 
-const raw = JSON.stringify([
-  {
-    platform: "LinkedIn Video",
-    hook: "Why facilities managers keep changing cleaning contractors",
-    problem: "Missed visits and poor communication create constant frustration.",
-    solution: "CleanReach delivers reliable commercial cleaning with consistent reporting and accountability.",
-    proof: "Our focus is long-term service consistency and proactive communication.",
-    cta: "Book a cleaning review with CleanReach.",
-    fullScript: "Facilities managers tell us the same thing. Their cleaning contractor starts well but standards slip. Missed visits, inconsistent communication and poor accountability create unnecessary pressure. CleanReach was built to solve this. We provide reliable commercial cleaning, clear reporting and responsive support so you can focus on running your facility instead of chasing contractors. If you would like a review of your current cleaning arrangements, get in touch with CleanReach today.",
-    durationSeconds: 60,
-    onScreenTextSuggestions: [
-      "Reliable Commercial Cleaning",
-      "Consistent Service",
-      "Clear Reporting"
-    ]
-  }
-]);
-
+  const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
+  
   type RawScript = {
     platform: VideoScript['platform'];
     hook: string;
@@ -62,8 +46,8 @@ const raw = JSON.stringify([
     onScreenTextSuggestions?: string[];
   };
 
-  const scripts = parseJsonFromAI<RawScript[]>(raw);
-
+  const parsed = parseJsonFromAI<RawScript | RawScript[]>(raw);
+  const scripts = Array.isArray(parsed) ? parsed : [parsed];
   const platformMap: Record<string, VideoScript['platform']> = {
     'linkedin video': 'LinkedIn Video',
     'youtube shorts / tiktok': 'YouTube Shorts',
@@ -72,7 +56,7 @@ const raw = JSON.stringify([
     'instagram reels': 'Instagram Reels',
   };
 
- return (Array.isArray(scripts) ? scripts : [scripts]).map((s) => ({
+ return scripts.map((s) => ({
     hook: s.hook ?? '',
     problem: s.problem ?? '',
     solution: s.solution ?? '',
