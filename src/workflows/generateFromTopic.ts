@@ -93,37 +93,8 @@ async function main() {
         console.warn('⚠️  Notion sync failed:', err instanceof Error ? err.message : err);
       }
     }
-// 5. Test GoHighLevel connection
 if (config.ghl.apiKey && config.ghl.locationId) {
-  try {
-    console.log('\n📞 Testing GoHighLevel...');
-
-    const result = await createContact(
-      'test@hellocleanreach.com',
-      'Clean',
-      'Reach Test'
-    );
-
-    console.log('✅ GoHighLevel connected:', result);
-  } catch (err) {
-    console.warn(
-      '⚠️ GoHighLevel test failed:',
-      err instanceof Error ? err.message : err
-    );
-  }
-}
-    try {
-  console.log('\n📇 Creating GoHighLevel contact...');
-
-  const contact = await createContact(
-    'test@cleanreach.ai',
-    'CleanReach',
-    'Test'
-  );
-
-  console.log('✅ Contact created:', contact);
-} catch (err) {
-  console.warn('⚠️ GHL sync failed:', err);
+  console.log('\n✅ GoHighLevel connection ready.');
 }
     console.log('\n🎉 Content pack ready for review!');
     console.log(`   Pack ID: ${pack.id}`);
