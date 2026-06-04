@@ -108,8 +108,8 @@ export function parseJsonFromAI<T>(raw: string): T {
     .replace(/```\s*$/im, '')
     .trim();
 
-  const firstArray = cleaned.indexOf('[');
-  const lastArray = cleaned.lastIndexOf(']');
+  const firstArray = cleaned.indexOf('[{');
+  const lastArray = cleaned.lastIndexOf('}]');
   const firstObject = cleaned.indexOf('{');
   const lastObject = cleaned.lastIndexOf('}');
 
