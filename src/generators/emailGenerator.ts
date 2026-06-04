@@ -75,8 +75,8 @@ Return the complete email as a JSON object. The body field should be plain text.
     wordCount: number;
   };
 
-  const email = parseJsonFromAI<RawEmail>(raw);
-
+const parsed = parseJsonFromAI<RawEmail | RawEmail[]>(raw);
+const email = Array.isArray(parsed) ? parsed[0] : parsed;
   // If AI didn't return valid HTML, generate it
   if (!email.fullHtml || email.fullHtml.length < 100) {
     email.fullHtml = buildHtmlEmail(
