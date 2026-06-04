@@ -42,14 +42,21 @@ const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
   format?: string;
 };
 const parsed = parseJsonFromAI<RawPost | RawPost[]>(raw);
-const posts = Array.isArray(parsed) ? parsed : [parsed];  
-const safePosts = posts;
-return safePosts.map((p) => ({
-    hook: p.hook ?? '',
-    body: p.body ?? '',
-    cta: p.cta ?? '',
-    fullPost: p.fullPost ?? `${p.hook}\n\n${p.body}\n\n${p.cta}`,
+const posts = Array.isArray(parsed) ? parsed : [parsed];
+
+return posts.map((p) => {
+  const hook = p.hook ?? '';
+  const body = p.body ?? '';
+  const cta = p.cta ?? '';
+  const fullPost = p.fullPost ?? `${hook}\n\n${body}\n\n${cta}`.trim();
+
+  return {
+    hook,
+    body,
+    cta,
+    fullPost,
     hashtags: p.hashtags ?? [],
-    characterCount: p.characterCount ?? p.fullPost?.length ?? 0,
-  }));
+    characterCount: p.characterCount ?? fullPost.length,
+  };
+});
 }
