@@ -37,6 +37,15 @@ const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
   characterCount: number;
   format?: string;
 };
-const posts = parseJsonFromAI<RawPost[]>(raw);
+  const posts = parseJsonFromAI<RawPost[]>(raw);
+  const safePosts = Array.isArray(posts) ? posts : [posts];
 
-return (Array.isArray(posts) ? posts : [posts]).map((p) => ({  
+  return safePosts.map((p) => ({
+    hook: p.hook ?? '',
+    body: p.body ?? '',
+    cta: p.cta ?? '',
+    fullPost: p.fullPost ?? `${p.hook}\n\n${p.body}\n\n${p.cta}`,
+    hashtags: p.hashtags ?? [],
+    characterCount: p.characterCount ?? p.fullPost?.length ?? 0,
+  }));
+}
