@@ -26,12 +26,28 @@ Commercial cleaning company owners and directors. Busy. Sceptical of generic mar
 7. **Sign-off** (simple, from CleanReach team)
 
 ## Output Format
-Return:
-- Subject line
-- Preview text
-- Full email body in plain text / Markdown
-- HTML version (simple, inline styles, mobile-friendly)
-- Word count
+
+Return ONLY valid JSON in this exact structure:
+
+{
+  "subjectLine": "",
+  "previewText": "",
+  "greeting": "",
+  "body": "",
+  "cta": "",
+  "ctaUrl": "",
+  "wordCount": 0
+}
+
+Rules:
+- Return JSON only
+- No markdown code fences
+- No explanations
+- No HTML
+- greeting should contain "Hi [First Name],"
+- body should contain the full newsletter content
+- cta should be a single call-to-action sentence
+- ctaUrl should contain the booking URL
 
 ## Topic
 {{TOPIC}}
