@@ -11,7 +11,7 @@ const SYSTEM_PROMPT = `${CLEANREACH_SYSTEM_PROMPT}
 For Google Business Profile posts, return one JSON object. Each object must have:
 {
   "type": "Service Highlight | Social Proof | Local Authority",
-  "body": "string (under 1500 characters)",
+  "body": "string (under 300 characters)",
   "cta": "string",
   "characterCount": number,
   "keywords": ["string"]
@@ -29,7 +29,7 @@ export async function generateGbpPosts(
 
   const userPrompt = `${promptTemplate}
 
-Return ONE valid JSON object only. Each must be under 1,500 characters and ready to publish. Use [CITY] as a placeholder for location. Include commercial cleaning keywords naturally.`;
+Return ONE valid JSON object only. Body must be under 300 characters. Use [CITY] as a placeholder for location. Include commercial cleaning keywords naturally.`;
 
   const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
   type RawGbp = {
