@@ -69,7 +69,8 @@ const raw = JSON.stringify({
     wordCount: number;
   };
 
-  const blog = parseJsonFromAI<RawBlog>(raw);
+  const parsed = parseJsonFromAI<RawBlog | RawBlog[]>(raw);
+  const blog = Array.isArray(parsed) ? parsed[0] : parsed;
 
   // Calculate word count if AI didn't provide it
   if (!blog.wordCount && blog.fullMarkdown) {
