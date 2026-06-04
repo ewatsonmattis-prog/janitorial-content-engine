@@ -18,8 +18,8 @@ import { createContact } from '../utils/ghlClient';
 
 const EXAMPLE_INPUT: ContentInput = {
   topic: 'Why commercial cleaning companies struggle to turn outreach into signed contracts',
-pillar: 'Middle Funnel Authority',
-sourceType: 'Weekly Authority Content',
+pillar: 'Cold Email Lead Generation',
+sourceType: 'Manual Topic',
 coreInsight:
   'Cleaning company owners do not need more generic leads. They need a system that builds trust, follows up consistently, and turns interest into booked sales conversations.',
 targetAudience:
