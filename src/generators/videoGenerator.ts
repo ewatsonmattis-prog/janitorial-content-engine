@@ -8,7 +8,7 @@ import { loadPrompt, buildVariables, CLEANREACH_SYSTEM_PROMPT } from '../utils/p
 
 const SYSTEM_PROMPT = `${CLEANREACH_SYSTEM_PROMPT}
 
-For video scripts, return a JSON array of exactly 3 scripts. Each object must have:
+For video scripts, return one JSON object. Each object must have:
 {
   "platform": "LinkedIn Video | YouTube Shorts / TikTok | Instagram Reels",
   "hook": "string (under 15 words)",
@@ -16,7 +16,7 @@ For video scripts, return a JSON array of exactly 3 scripts. Each object must ha
   "solution": "string",
   "proof": "string",
   "cta": "string",
-  "fullScript": "string (full spoken script with rough timing notes in brackets)",
+  "fullScript": "string under 120 words",
   "durationSeconds": number,
   "onScreenTextSuggestions": ["string"]
 }
@@ -30,7 +30,7 @@ export async function generateVideoScripts(
 
   const userPrompt = `${promptTemplate}
 
-Return exactly 3 video scripts as a JSON array — one per platform. Scripts should be fully written out, ready to record. Include rough timing cues in brackets. Keep total spoken time between 45–90 seconds per script.`;
+Return ONE valid JSON object only. Scripts should be fully written out, ready to record. Include rough timing cues in brackets. Keep total spoken time between 45–90 seconds per script.`;
 
   const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
   
