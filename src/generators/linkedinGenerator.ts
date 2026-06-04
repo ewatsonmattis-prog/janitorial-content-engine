@@ -8,7 +8,7 @@ import { loadPrompt, buildVariables, CLEANREACH_SYSTEM_PROMPT } from '../utils/p
 
 const SYSTEM_PROMPT = `${CLEANREACH_SYSTEM_PROMPT}
 
-For LinkedIn posts, return a JSON array of exactly 5 posts. Each object must have:
+For LinkedIn posts, return one JSON object. It must have:
 {
   "hook": "string",
   "body": "string",
@@ -26,7 +26,11 @@ export async function generateLinkedInPosts(
 ): Promise<LinkedInPost[]> {
   const promptTemplate = loadPrompt('linkedin-post', buildVariables(input));
 
-const userPrompt = `${promptTemplate}`;
+const userPrompt = `${promptTemplate}
+
+Return ONE valid JSON object only.
+Keep body under 120 words.
+No markdown. No commentary.`;
 const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
   type RawPost = {
   hook: string;
