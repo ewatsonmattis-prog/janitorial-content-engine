@@ -105,5 +105,5 @@ const email = Array.isArray(parsed) ? parsed[0] : parsed;
     email.wordCount = email.body.split(/\s+/).length;
   }
 
-  return email;
+  return email as EmailNewsletter;
 }
