@@ -12,6 +12,7 @@ import { pushContentToAirtable } from '../data/airtable';
 import { saveContentPackToNotion } from '../data/notion';
 import { CONTENT_PILLARS } from '../config/brand';
 import { createContact } from '../utils/ghlClient';
+import { publishNewsletter } from '../integrations/gohighlevel/newsletterPublisher';
 
 // ─── Example / Default Input ─────────────────────────────────
 // Replace this or pass via CLI args / environment variables
@@ -94,9 +95,29 @@ async function main() {
         console.warn('⚠️  Notion sync failed:', err instanceof Error ? err.message : err);
       }
     }
-if (config.ghl.apiKey && config.ghl.locationId) {
-  console.log('\n✅ GoHighLevel connection ready.');
-}
+        // 5. Publish newsletter to GoHighLevel as email template (if configured)
+    if (config.ghl.apiKey && config.ghl.locationId) {
+      try {
+        console.log('\n📧 Publishing newsletter to GoHighLevel...');
+        const result = await publishNewsletter(
+          pack.emailNewsletter.subjectLine,
+          pack.emailNewsletter.previewText,
+          pack.emailNewsletter.fullHtml,
+          pack.emailNewsletter.body
+        );
+
+        if (result.success) {
+          console.log(`✅ GoHighLevel newsletter template created: ${result.templateId}`);
+        } else {
+          console.warn(`⚠️ GoHighLevel publish failed: ${result.message}`);
+        }
+      } catch (err) {
+        console.warn(
+          '⚠️ GoHighLevel publish failed:',
+          err instanceof Error ? err.message : err
+        );
+      }
+    }
     console.log('\n🎉 Content pack ready for review!');
     console.log(`   Pack ID: ${pack.id}`);
     console.log(`   Topic: ${pack.input.topic}`);
