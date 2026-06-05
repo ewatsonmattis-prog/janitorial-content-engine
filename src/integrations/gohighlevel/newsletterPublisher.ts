@@ -1,3 +1,4 @@
+import { config } from '../../config/env';
 import { ghlClient } from './goHighLevelClient';
 import {
   GhlEmailTemplatePayload,
