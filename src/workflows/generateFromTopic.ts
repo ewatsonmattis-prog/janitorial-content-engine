@@ -3,6 +3,7 @@
 // CleanReach Content Engine – Generate From Topic
 // ─────────────────────────────────────────────────────────────
 
+import { publishContentPackToGhlWebhook } from '../integrations/gohighlevel/contentWebhookPublisher';
 import { validateConfig, config } from '../config/env';
 import { ContentInput, ContentPillar } from '../config/types';
 import { generateContentPack } from '../generators/contentPackGenerator';
@@ -107,27 +108,18 @@ async function main() {
       }
     }
 
-    // GoHighLevel User Lookup
-    if (config.ghl.apiKey && config.ghl.locationId) {
-      console.log('\n✅ GoHighLevel connection ready.');
-
+        // GoHighLevel webhook publish
+    if (config.ghl.contentWebhookUrl) {
       try {
-        const users = await ghlClient.getUsers();
-
-        console.log(
-          '\n============================'
-        );
-        console.log('GHL USERS');
-        console.log(
-          JSON.stringify(users, null, 2)
-        );
-        console.log(
-          '============================\n'
-        );
+        console.log('\n📨 Sending content pack to GoHighLevel webhook...');
+        await publishContentPackToGhlWebhook(pack);
       } catch (err) {
-        console.error(
-          'User lookup failed:',
+        console.warn(
+          '⚠️ GoHighLevel webhook publish failed:',
           err instanceof Error ? err.message : err
+        );
+      }
+    }
         );
       }
     }
