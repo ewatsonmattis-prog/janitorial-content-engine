@@ -11,13 +11,18 @@ export async function publishNewsletter(
   plainText: string
 ): Promise<PublishNewsletterResult> {
   try {
-    const payload: GhlEmailTemplatePayload = {
-      name: `CleanReach Newsletter ${new Date().toISOString()}`,
-      subject,
-      previewText,
-      html: htmlContent,
-      plainText,
-    };
+    const payload = {
+  name: `CleanReach Newsletter ${new Date().toISOString()}`,
+  title: subject,
+  subject,
+  previewText,
+  body: htmlContent,
+  html: htmlContent,
+  plainText,
+  editorType: 'html',
+  timeZone: 'Europe/London',
+  userId: config.ghl.userId,
+};
 
     const response = await ghlClient.createEmailTemplate(payload);
 
