@@ -50,5 +50,4 @@ jobs:
                echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPICKEY }}" >> .env
                echo "GHL_API_KEY=${{ secrets.GHLAPIKEY }}" >> .env
                echo "GHL_LOCATION_ID=${{ secrets.GHL_LOCATION_ID }}" >> .env
-               echo "GHL_USER_ID=${{ secrets.GHL_USER_ID }}" >> .env
                echo "GHL_CONTENT_WEBHOOK_URL=${{ secrets.GHL_CONTENT_WEBHOOK_URL }}" >> .env
