@@ -11,8 +11,8 @@ export class GoHighLevelClient {
   }
 
   async createEmailTemplate(payload: unknown): Promise<any> {
-    const response = await fetch(
-      `${this.baseUrl}/emails/templates`,
+  const response = await fetch(
+    `${this.baseUrl}/emails/public/v2/locations/${config.ghl.locationId}/campaigns/email-campaign`,
       {
         method: 'POST',
         headers: this.headers,
