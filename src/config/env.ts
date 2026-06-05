@@ -51,6 +51,7 @@ ghl: {
   apiKey: optional('GHL_API_KEY'),
   locationId: optional('GHL_LOCATION_ID'),
   userId: optional('GHL_USER_ID'),
+  contentWebhookUrl: optional('GHL_CONTENT_WEBHOOK_URL'),
 },
 };
 /**
