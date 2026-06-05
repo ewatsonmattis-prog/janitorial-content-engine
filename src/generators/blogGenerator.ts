@@ -25,7 +25,7 @@ For blog articles, return a JSON object with this exact schema:
     { "heading": "string", "content": "string" }
   ],
   "conclusion": "string",
-  "fullMarkdown": "string (complete article in Markdown)",
+  "fullMarkdown": "string under 700 words",
   "wordCount": number
 }
 
@@ -36,11 +36,15 @@ export async function generateBlogArticle(
 ): Promise<BlogArticle> {
   const promptTemplate = loadPrompt('blog-article', buildVariables(input));
 
-  const userPrompt = `${promptTemplate}
+const userPrompt = `${promptTemplate}
 
-Return the complete blog article as a JSON object. The fullMarkdown field must contain the full publishable article including all headings, body copy, and CTA block. Aim for 1,200–1,800 words.`;
+Return ONE valid JSON object only.
+Keep fullMarkdown under 700 words.
+No markdown outside the JSON.
+No commentary.`;
 
 const raw = await aiComplete(SYSTEM_PROMPT, userPrompt);
+  
   type RawBlog = {
     title: string;
     seo: SeoData;
