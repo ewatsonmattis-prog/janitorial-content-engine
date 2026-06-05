@@ -31,7 +31,7 @@ export class GoHighLevelClient {
     return response.json();
   }
 
-  async testConnection(): Promise<boolean> {
+   async testConnection(): Promise<boolean> {
     try {
       const response = await fetch(
         `${this.baseUrl}/locations/${config.ghl.locationId}`,
@@ -45,6 +45,19 @@ export class GoHighLevelClient {
     } catch {
       return false;
     }
+  }
+
+  async getUsers(): Promise<any> {
+  const response = await fetch(`${this.baseUrl}/users/search`, {
+      method: 'GET',
+      headers: this.headers,
+    });
+
+  if (!response.ok) {
+  throw new Error(await response.text());
+    }
+
+  return response.json();
   }
 }
 
