@@ -1,16 +1,12 @@
 #!/usr/bin/env ts-node
-// ─────────────────────────────────────────────────────────────
-// CleanReach Content Engine – Generate From Topic
-// ─────────────────────────────────────────────────────────────
 
-import { publishContentPackToGhlWebhook } from '../integrations/gohighlevel/contentWebhookPublisher';
 import { validateConfig, config } from '../config/env';
 import { ContentInput, ContentPillar } from '../config/types';
 import { generateContentPack } from '../generators/contentPackGenerator';
 import { exportContentPack } from '../exports/exportSystem';
 import { pushContentToAirtable } from '../data/airtable';
 import { saveContentPackToNotion } from '../data/notion';
-import { ghlClient } from '../integrations/gohighlevel/goHighLevelClient';
+import { publishContentPackToGhlWebhook } from '../integrations/gohighlevel/contentWebhookPublisher';
 
 const EXAMPLE_INPUT: ContentInput = {
   topic: 'Why commercial cleaning companies struggle to turn outreach into signed contracts',
@@ -32,10 +28,7 @@ async function main() {
   try {
     validateConfig();
   } catch (err) {
-    console.error(
-      '❌ Config error:',
-      err instanceof Error ? err.message : err
-    );
+    console.error('❌ Config error:', err instanceof Error ? err.message : err);
     process.exit(1);
   }
 
@@ -48,67 +41,43 @@ async function main() {
       topic: args[0],
       pillar: (args[1] as ContentPillar) ?? EXAMPLE_INPUT.pillar,
     };
-
     console.log(`📌 Topic from CLI: "${input.topic}"\n`);
   } else {
     console.log(`📌 Using example topic: "${input.topic}"\n`);
   }
 
   try {
-    // Generate content
     const pack = await generateContentPack(input);
 
-    // Export content
     console.log('📁 Exporting content...');
-
     const exportResult = await exportContentPack(pack, {
       outputDir: config.output.dir,
       formats: ['markdown', 'csv', 'json'],
     });
 
-    console.log(
-      `\n✅ Export complete: ${exportResult.exportedFiles.length} files`
-    );
+    console.log(`\n✅ Export complete: ${exportResult.exportedFiles.length} files`);
+    exportResult.exportedFiles.forEach((f) => console.log(`   → ${f}`));
 
-    exportResult.exportedFiles.forEach((f) =>
-      console.log(`   → ${f}`)
-    );
-
-    // Airtable
     if (config.airtable.apiKey && config.airtable.baseId) {
       try {
         console.log('\n📊 Syncing to Airtable...');
-
         const recordId = await pushContentToAirtable(pack);
-
         console.log(`✅ Airtable record: ${recordId}`);
       } catch (err) {
-        console.warn(
-          '⚠️ Airtable sync failed:',
-          err instanceof Error ? err.message : err
-        );
+        console.warn('⚠️ Airtable sync failed:', err instanceof Error ? err.message : err);
       }
     }
 
-    // Notion
     if (config.notion.apiKey && config.notion.databaseId) {
       try {
         console.log('\n📓 Syncing to Notion...');
-
         const pageIds = await saveContentPackToNotion(pack);
-
-        console.log(
-          `✅ Notion pages created: ${pageIds.length}`
-        );
+        console.log(`✅ Notion pages created: ${pageIds.length}`);
       } catch (err) {
-        console.warn(
-          '⚠️ Notion sync failed:',
-          err instanceof Error ? err.message : err
-        );
+        console.warn('⚠️ Notion sync failed:', err instanceof Error ? err.message : err);
       }
     }
 
-        // GoHighLevel webhook publish
     if (config.ghl.contentWebhookUrl) {
       try {
         console.log('\n📨 Sending content pack to GoHighLevel webhook...');
@@ -117,9 +86,6 @@ async function main() {
         console.warn(
           '⚠️ GoHighLevel webhook publish failed:',
           err instanceof Error ? err.message : err
-        );
-      }
-    }
         );
       }
     }
@@ -133,15 +99,8 @@ async function main() {
     console.log(`Video scripts: ${pack.videoScripts.length}`);
     console.log(`Cold email angles: ${pack.coldEmailAngles.length}`);
   } catch (err) {
-    console.error(
-      '\n❌ Generation failed:',
-      err instanceof Error ? err.message : err
-    );
-
-    if (err instanceof Error && err.stack) {
-      console.error(err.stack);
-    }
-
+    console.error('\n❌ Generation failed:', err instanceof Error ? err.message : err);
+    if (err instanceof Error && err.stack) console.error(err.stack);
     process.exit(1);
   }
 }
