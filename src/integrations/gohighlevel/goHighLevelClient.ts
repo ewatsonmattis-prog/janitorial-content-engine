@@ -4,7 +4,7 @@ export class GoHighLevelClient {
 
   private get headers() {
     return {
-      Authorization: `Bearer ${config.gohighlevel.apiKey}`,
+      Authorization: `Bearer ${config.ghl.apiKey}`,
       Version: '2021-07-28',
       'Content-Type': 'application/json',
     };
@@ -34,7 +34,7 @@ export class GoHighLevelClient {
   async testConnection(): Promise<boolean> {
     try {
       const response = await fetch(
-        `${this.baseUrl}/locations/${config.gohighlevel.locationId}`,
+        `${this.baseUrl}/locations/${config.ghl.locationId}`,
         {
           method: 'GET',
           headers: this.headers,
