@@ -40,5 +40,15 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add outputs/
-          git commit -m "Weekly content generation" || echo "No changes"
+          git commit -m "Wekly content generation" || echo "No changes"
           git push
+          - name: Create .env
+
+          - name: Create .env
+            run: |
+               echo "AI_PROVIDER=anthropic" >> .env
+               echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPICKEY }}" >> .env
+               echo "GHL_API_KEY=${{ secrets.GHLAPIKEY }}" >> .env
+               echo "GHL_LOCATION_ID=${{ secrets.GHL_LOCATION_ID }}" >> .env
+               echo "GHL_USER_ID=${{ secrets.GHL_USER_ID }}" >> .env
+               echo "GHL_CONTENT_WEBHOOK_URL=${{ secrets.GHL_CONTENT_WEBHOOK_URL }}" >> .env
