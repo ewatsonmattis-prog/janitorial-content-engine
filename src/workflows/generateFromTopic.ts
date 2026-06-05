@@ -1,7 +1,6 @@
 #!/usr/bin/env ts-node
 // ─────────────────────────────────────────────────────────────
 // CleanReach Content Engine – Generate From Topic
-// Usage: npm run generate:topic
 // ─────────────────────────────────────────────────────────────
 
 import { validateConfig, config } from '../config/env';
@@ -10,22 +9,17 @@ import { generateContentPack } from '../generators/contentPackGenerator';
 import { exportContentPack } from '../exports/exportSystem';
 import { pushContentToAirtable } from '../data/airtable';
 import { saveContentPackToNotion } from '../data/notion';
-import { CONTENT_PILLARS } from '../config/brand';
-import { createContact } from '../utils/ghlClient';
-import { publishNewsletter } from '../integrations/gohighlevel/newsletterPublisher';
-
-// ─── Example / Default Input ─────────────────────────────────
-// Replace this or pass via CLI args / environment variables
+import { ghlClient } from '../integrations/gohighlevel/goHighLevelClient';
 
 const EXAMPLE_INPUT: ContentInput = {
   topic: 'Why commercial cleaning companies struggle to turn outreach into signed contracts',
-pillar: 'Cold Email Lead Generation',
-sourceType: 'Manual Topic',
-coreInsight:
-  'Cleaning company owners do not need more generic leads. They need a system that builds trust, follows up consistently, and turns interest into booked sales conversations.',
-targetAudience:
-  'Commercial cleaning company owners, managing directors, and growth-focused cleaning businesses',
-cta: 'Book a CleanReach growth strategy call',
+  pillar: 'Cold Email Lead Generation',
+  sourceType: 'Manual Topic',
+  coreInsight:
+    'Cleaning company owners do not need more generic leads. They need a system that builds trust, follows up consistently, and turns interest into booked sales conversations.',
+  targetAudience:
+    'Commercial cleaning company owners, managing directors, and growth-focused cleaning businesses',
+  cta: 'Book a CleanReach growth strategy call',
 };
 
 async function main() {
@@ -34,15 +28,16 @@ async function main() {
   console.log('  Mode: Generate From Topic');
   console.log('─────────────────────────────────────────\n');
 
-  // Validate environment
   try {
     validateConfig();
   } catch (err) {
-    console.error('❌ Config error:', err instanceof Error ? err.message : err);
+    console.error(
+      '❌ Config error:',
+      err instanceof Error ? err.message : err
+    );
     process.exit(1);
   }
 
-  // Get input from CLI args or use default
   const args = process.argv.slice(2);
   let input = EXAMPLE_INPUT;
 
@@ -52,85 +47,109 @@ async function main() {
       topic: args[0],
       pillar: (args[1] as ContentPillar) ?? EXAMPLE_INPUT.pillar,
     };
+
     console.log(`📌 Topic from CLI: "${input.topic}"\n`);
   } else {
     console.log(`📌 Using example topic: "${input.topic}"\n`);
-    console.log(
-      'Tip: Pass a topic as argument: npm run generate:topic -- "Your topic here"\n'
-    );
   }
 
   try {
-    // 1. Generate content pack
+    // Generate content
     const pack = await generateContentPack(input);
 
-    // 2. Export to files
+    // Export content
     console.log('📁 Exporting content...');
+
     const exportResult = await exportContentPack(pack, {
       outputDir: config.output.dir,
       formats: ['markdown', 'csv', 'json'],
     });
 
-    console.log(`\n✅ Export complete: ${exportResult.exportedFiles.length} files`);
-    exportResult.exportedFiles.forEach((f) => console.log(`   → ${f}`));
+    console.log(
+      `\n✅ Export complete: ${exportResult.exportedFiles.length} files`
+    );
 
-    // 3. Sync to Airtable (if configured)
+    exportResult.exportedFiles.forEach((f) =>
+      console.log(`   → ${f}`)
+    );
+
+    // Airtable
     if (config.airtable.apiKey && config.airtable.baseId) {
       try {
         console.log('\n📊 Syncing to Airtable...');
+
         const recordId = await pushContentToAirtable(pack);
+
         console.log(`✅ Airtable record: ${recordId}`);
       } catch (err) {
-        console.warn('⚠️  Airtable sync failed:', err instanceof Error ? err.message : err);
-      }
-    }
-
-    // 4. Sync to Notion (if configured)
-    if (config.notion.apiKey && config.notion.databaseId) {
-      try {
-        console.log('\n📓 Syncing to Notion...');
-        const pageIds = await saveContentPackToNotion(pack);
-        console.log(`✅ Notion pages created: ${pageIds.length}`);
-      } catch (err) {
-        console.warn('⚠️  Notion sync failed:', err instanceof Error ? err.message : err);
-      }
-    }
-        // 5. Publish newsletter to GoHighLevel as email template (if configured)
-    if (config.ghl.apiKey && config.ghl.locationId) {
-      try {
-        console.log('\n📧 Publishing newsletter to GoHighLevel...');
-        const result = await publishNewsletter(
-          pack.emailNewsletter.subjectLine,
-          pack.emailNewsletter.previewText,
-          pack.emailNewsletter.fullHtml,
-          pack.emailNewsletter.body
-        );
-
-        if (result.success) {
-          console.log(`✅ GoHighLevel newsletter template created: ${result.templateId}`);
-        } else {
-          console.warn(`⚠️ GoHighLevel publish failed: ${result.message}`);
-        }
-      } catch (err) {
         console.warn(
-          '⚠️ GoHighLevel publish failed:',
+          '⚠️ Airtable sync failed:',
           err instanceof Error ? err.message : err
         );
       }
     }
+
+    // Notion
+    if (config.notion.apiKey && config.notion.databaseId) {
+      try {
+        console.log('\n📓 Syncing to Notion...');
+
+        const pageIds = await saveContentPackToNotion(pack);
+
+        console.log(
+          `✅ Notion pages created: ${pageIds.length}`
+        );
+      } catch (err) {
+        console.warn(
+          '⚠️ Notion sync failed:',
+          err instanceof Error ? err.message : err
+        );
+      }
+    }
+
+    // GoHighLevel User Lookup
+    if (config.ghl.apiKey && config.ghl.locationId) {
+      console.log('\n✅ GoHighLevel connection ready.');
+
+      try {
+        const users = await ghlClient.getUsers();
+
+        console.log(
+          '\n============================'
+        );
+        console.log('GHL USERS');
+        console.log(
+          JSON.stringify(users, null, 2)
+        );
+        console.log(
+          '============================\n'
+        );
+      } catch (err) {
+        console.error(
+          'User lookup failed:',
+          err instanceof Error ? err.message : err
+        );
+      }
+    }
+
     console.log('\n🎉 Content pack ready for review!');
-    console.log(`   Pack ID: ${pack.id}`);
-    console.log(`   Topic: ${pack.input.topic}`);
-    console.log(`   LinkedIn posts: ${pack.linkedInPosts.length}`);
-    console.log(`   Blog words: ${pack.blogArticle.wordCount}`);
-    console.log(`   GBP posts: ${pack.gbpPosts.length}`);
-    console.log(`   Video scripts: ${pack.videoScripts.length}`);
-    console.log(`   Cold email angles: ${pack.coldEmailAngles.length}`);
+    console.log(`Pack ID: ${pack.id}`);
+    console.log(`Topic: ${pack.input.topic}`);
+    console.log(`LinkedIn posts: ${pack.linkedInPosts.length}`);
+    console.log(`Blog words: ${pack.blogArticle.wordCount}`);
+    console.log(`GBP posts: ${pack.gbpPosts.length}`);
+    console.log(`Video scripts: ${pack.videoScripts.length}`);
+    console.log(`Cold email angles: ${pack.coldEmailAngles.length}`);
   } catch (err) {
-    console.error('\n❌ Generation failed:', err instanceof Error ? err.message : err);
+    console.error(
+      '\n❌ Generation failed:',
+      err instanceof Error ? err.message : err
+    );
+
     if (err instanceof Error && err.stack) {
       console.error(err.stack);
     }
+
     process.exit(1);
   }
 }
